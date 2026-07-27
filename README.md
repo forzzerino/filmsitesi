@@ -1,16 +1,52 @@
-# React + Vite
+# herhangi1filmsitesi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React temellerini hatırlamak ve pratik yapmak için geliştirilen bir film keşif sitesi. TMDB API kullanılarak _şimdilik_ trend, popüler ve en çok oy alan filmler listelenir.
 
-Currently, two official plugins are available:
+## Teknolojiler
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** — UI
+- **React Router** — Sayfa yönlendirme
+- **Tailwind CSS v4** — Stil
+- **Vite** — Build & dev server
+- **TMDB API** — Film verileri
 
-## React Compiler
+## Proje Yapısı
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+src/
+├── components/        # UI bileşenleri
+│   ├── Hero.jsx       # Ana sayfa hero bölümü
+│   ├── Home.jsx       # Ana sayfa
+│   ├── MovieCard.jsx  # Tekil film kartı
+│   ├── MovieCategories.jsx  # Film kategorisi listesi
+│   ├── MovieDetails.jsx     # Film detay sayfası
+│   ├── Navbar.jsx     # Üst menü
+│   └── Footer.jsx     # Alt menü
+├── context/           # React Context (global state)
+│   └── MoviesContext.jsx
+├── layouts/           # Sayfa iskeletleri
+│   └── MainLayout.jsx
+├── services/          # API çağrıları
+│   └── filmservice.js
+└── main.jsx           # Uygulama giriş noktası
+```
 
-## Expanding the ESLint configuration
+## Kurulum
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+```
+
+Proje kök dizinine `.env` dosyası oluştur:
+
+```
+VITE_TMDB_API_KEY=senin_api_anahtarin
+```
+
+API anahtarını [TMDB](https://www.themoviedb.org/settings/api) üzerinden alabilirsin.
+
+## Çalıştırma
+
+```bash
+npm run dev
+```
