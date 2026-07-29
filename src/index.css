@@ -3,7 +3,7 @@
 @import "@fontsource-variable/raleway";
 @import "@fontsource-variable/jetbrains-mono";
 @import "./typeset.css";
-
+/* --preset b50wKM0FE */
 :root {
 	--font-raleway: "Raleway Variable", sans-serif;
 	--font-jetbrains-mono: "JetBrains Mono Variable", monospace;

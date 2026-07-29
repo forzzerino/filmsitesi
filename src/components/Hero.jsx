@@ -16,7 +16,7 @@ export default function Hero({ movie, genres }) {
 	if (!movie) return null;
 	return (
 		<>
-			<div id="hero" className="relative">
+			<div id="hero" className="relative h-screen">
 				<div className="grid grid-cols-2 p-6 py-12">
 					<div className="my-auto pl-12">
 						<div className="select-none">

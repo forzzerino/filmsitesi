@@ -5,12 +5,21 @@ export default function MovieCard({ movie }) {
 	return (
 		<div key={movie.id} className="moviecard group">
 			<Link to={`/movies/${movie.id}`} className="">
-				<div className="block overflow-hidden rounded-lg">
-					<img
-						src={getImageUrl("w500", movie.poster_path)}
-						className="h-96 w-full rounded-lg object-cover cursor-pointer transition-all group-hover:scale-105 duration-300 "
-						alt={movie.title}
-					/>
+				<div className="block group overflow-hidden rounded-lg relative">
+					<div className="">
+						<div className="absolute top-0 left-0 h-full w-full bg-linear-to-t from-black from-20% to-transparent text-gray-300 p-4 opacity-0 flex flex-col justify-end gap-4 group-hover:opacity-100 items-end text-sm transition-all duration-300 z-10">
+							<p className="text-balance line-clamp-6">
+								{movie.overview}
+							</p>
+
+							<button className="button-secondary">Devamı</button>
+						</div>
+						<img
+							src={getImageUrl("w500", movie.poster_path)}
+							className="h-96 w-full rounded-lg object-cover cursor-pointer transition-all duration-300"
+							alt={movie.title}
+						/>
+					</div>
 				</div>
 				<p className="font-bold text-lg line-clamp-1 mt-1">
 					{movie.title}

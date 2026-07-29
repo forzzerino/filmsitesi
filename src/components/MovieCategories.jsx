@@ -7,6 +7,7 @@ export default function MovieCategories({
 	movies,
 	loading,
 	error,
+	route,
 }) {
 	if (loading)
 		return (
@@ -22,7 +23,7 @@ export default function MovieCategories({
 			<section id={id}>
 				<div className="max-w-350 my-12 mx-auto">
 					<div className="title mb-3">
-						<div className="font-bold text-3xl">{title}</div>
+						<div className="font-bold text-3xl"># {title}</div>
 						<div className="font-medium text-lg">{desc}</div>
 					</div>
 					<div className="filmcards grid grid-cols-5 gap-8 my-6">
@@ -35,7 +36,7 @@ export default function MovieCategories({
 						})}
 					</div>
 					<div className="flex justify-center">
-						<Link to={`/movies/trending`} className="w-64">
+						<Link to={`${route}`} className="w-64">
 							<button className="button-primary">Dahası</button>
 						</Link>
 					</div>
