@@ -1,24 +1,35 @@
 import { useEffect, useState } from "react";
 import { getImageUrl } from "../services/filmservice";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function Hero({ movie, genres }) {
 	const [poster, setPoster] = useState(null);
 	const [backdrop, setBackDrop] = useState(null);
+	const [searchQuery, setSearchQuery] = useState("");
+	const navigate = useNavigate();
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		const query = searchQuery.trim();
+		if (query) {
+			navigate(`/movies/search?query=${encodeURIComponent(query)}`);
+			setSearchQuery("");
+		}
+	}
+
 	useEffect(() => {
 		const backdrop = getImageUrl("w1280", movie.backdrop_path || null);
 		setBackDrop(backdrop);
 		const poster = getImageUrl("w500", movie.poster_path || null);
 		setPoster(poster);
-		console.log(movie);
 	}, []);
 
 	if (!movie) return null;
 	return (
 		<>
-			<div id="hero" className="relative h-screen">
-				<div className="grid grid-cols-2 p-6 py-12">
-					<div className="my-auto pl-12">
+			<section id="hero" className="pt-20">
+				<div className="max-w-350 mx-auto grid grid-cols-2 p-6 py-12">
+					<div className="my-auto">
 						<div className="select-none">
 							<p className="font-mono pl-2 text-gray-500">
 								Özenle seçilmiş bir sinema koleksiyonu.
@@ -31,51 +42,65 @@ export default function Hero({ movie, genres }) {
 								Filmsitesi.
 							</p>
 						</div>
-						<div className="group mt-12 flex items-center gap-2 border-b-2 border-white text-white w-3/4">
-							<label htmlFor="search">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									className="lucide lucide-search-icon lucide-search"
+						<div className="group mt-12 border-b-2 border-white text-white">
+							<form
+								onSubmit={handleSubmit}
+								className="flex items-center gap-2 "
+							>
+								<label htmlFor="heroSearch">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										className="lucide lucide-search-icon lucide-search"
+									>
+										<path d="m21 21-4.34-4.34" />
+										<circle cx="11" cy="11" r="8" />
+									</svg>
+								</label>
+								<input
+									type="search"
+									name="heroSearch"
+									id="heroSearch"
+									onChange={(e) =>
+										setSearchQuery(e.target.value)
+									}
+									placeholder="istediğin filmi ara"
+									className="p-2 text-white font-semibold outline-none bg-transparent transition-all w-full"
+								/>
+								<button
+									type="submit"
+									onSubmit={(e) =>
+										setSearchQuery(e.target.value)
+									}
+									className="group-hover:translate-x-2 ransition-all duration-300 ease-in-out"
 								>
-									<path d="m21 21-4.34-4.34" />
-									<circle cx="11" cy="11" r="8" />
-								</svg>
-							</label>
-							<input
-								type="search"
-								name="search"
-								id="search"
-								placeholder="istediğin filmi ara"
-								className="p-2 text-white font-semibold outline-none bg-transparent transition-all w-full"
-							/>
-							<span className="group-hover:translate-x-2 ransition-all duration-300 ease-in-out">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									className="lucide lucide-arrow-right-icon lucide-arrow-right"
-								>
-									<path d="M5 12h14" />
-									<path d="m12 5 7 7-7 7" />
-								</svg>
-							</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										className="lucide lucide-arrow-right-icon lucide-arrow-right"
+									>
+										<path d="M5 12h14" />
+										<path d="m12 5 7 7-7 7" />
+									</svg>
+								</button>
+							</form>
 						</div>
 					</div>
-					<div className="flex flex-col text-gray-300">
+					<div className="flex text-gray-300">
 						<div className=" flex flex-col mx-auto gap-2">
 							<div className="image">
 								<img
@@ -133,7 +158,7 @@ export default function Hero({ movie, genres }) {
 						</div>
 					</div>
 				</div>
-				<div className="bg">
+				<div className="">
 					<img
 						src={backdrop}
 						alt={movie?.title}
@@ -141,7 +166,7 @@ export default function Hero({ movie, genres }) {
 					/>
 					<div className="absolute top-0 -z-10 left-0 w-full h-full bg-black opacity-80 blur-xl "></div>
 				</div>
-			</div>
+			</section>
 		</>
 	);
 }

@@ -4,14 +4,13 @@ import { fetchMovieDetails } from "../services/filmservice";
 import { getImageUrl } from "../services/filmservice";
 import { useMovies } from "../context/MoviesContext";
 import { Link } from "react-router";
-
+import LoadingView from "../views/LoadingView";
 export default function MovieDetails() {
 	const movieId = useParams().id;
 	const [movie, setMovie] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const { genres } = useMovies();
-	console.log(movie);
 
 	useEffect(() => {
 		async function loadMovieDetail() {
@@ -41,17 +40,17 @@ export default function MovieDetails() {
 			}
 		}
 		loadMovieDetail();
-	}, []);
+	}, [movieId]);
 
-	if (loading) return <div>Yükleniyor</div>;
-	if (error) return <div>Hata: {error.message}</div>;
+	if (loading) return <LoadingView />;
+	if (error) return <ErrorView error={error.message} />;
 
 	return (
 		<>
 			<main id={movie.id}>
-				<div className="relative">
-					<div className="grid grid-cols-3 p-6 py-12 ">
-						<div className="mx-auto">
+				<div className="relative p-12 pt-30 ">
+					<div className="grid grid-cols-3 max-w-350 mx-auto">
+						<div className="">
 							<div className="image">
 								<img
 									src={movie.poster_path}
@@ -60,7 +59,7 @@ export default function MovieDetails() {
 								/>
 							</div>
 						</div>
-						<div className="col-span-2 flex flex-col gap-4 pt-12">
+						<div className="col-span-2 flex flex-col gap-4 pt-12 ">
 							{movie.tagline && (
 								<p className="font-mono text-gray-400 tracking-tight leading-tight text-lg">
 									{movie.tagline}
@@ -85,9 +84,11 @@ export default function MovieDetails() {
 								</div>
 							))} */}
 								{movie.genres && (
-									<span>{movie.genres[0].name}</span>
+									<span>{movie.genres[0]?.name}</span>
 								)}
-								<span className="text-gray-500">•</span>
+								{movie.genres?.[0]?.name && (
+									<span className="text-gray-500">•</span>
+								)}
 								{movie.release_date && (
 									<span>{movie.release_date}</span>
 								)}
@@ -150,16 +151,30 @@ export default function MovieDetails() {
 							)}
 						</div>
 					</div>
-					<div className="bg">
+					<div className="absolute top-0 left-0 w-screen h-screen bg -z-50">
 						<img
 							src={movie.backdrop_path}
 							alt={movie?.title}
-							className="absolute top-0 left-0 w-full h-full object-cover -z-50"
+							className="absolute top-0 left-0 h-full w-full -z-50 object-cover"
+							style={{
+								WebkitMaskImage:
+									"linear-gradient(to bottom, black 60%, transparent 95%)",
+								maskImage:
+									"linear-gradient(to bottom, black 60%, transparent 95%)",
+							}}
 						/>
-						<div className="absolute top-0 -z-10 left-0 w-full h-full bg-black opacity-80 blur-xl "></div>
+						<div
+							className="absolute top-0 -z-10 left-0 w-full h-full bg-black opacity-80"
+							style={{
+								WebkitMaskImage:
+									"linear-gradient(to bottom, black 60%, transparent 95%)",
+								maskImage:
+									"linear-gradient(to bottom, black 60%, transparent 95%)",
+							}}
+						></div>
 					</div>
 				</div>
-				<div className="max-w-350 my-12 mx-auto">
+				<section className="max-w-350 my-12 mx-auto">
 					<div className="cast">
 						<div className="title mb-3">
 							<div className="font-bold text-3xl">Cast</div>
@@ -235,7 +250,7 @@ export default function MovieDetails() {
 								))}
 						</div>
 					</div>
-				</div>
+				</section>
 			</main>
 		</>
 	);

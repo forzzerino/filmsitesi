@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import MovieCategories from "./MovieCategories";
 import Hero from "./Hero";
 import TopRated from "./TopRated";
-import { ErrorView } from "../views/ErrorView";
+import ErrorView from "../views/ErrorView";
 export default function Home() {
 	const {
 		loading,
@@ -32,6 +32,7 @@ export default function Home() {
 			/>
 
 			<TopRated
+				id="topRatedMovies"
 				movies={topRatedMovies}
 				title={"En çok oy almışlar"}
 				desc={"En çok oy almış filmler."}
@@ -45,15 +46,6 @@ export default function Home() {
 				error={error}
 				route={"/movies/popular"}
 			/>
-			{/* <MovieCategories
-				id="topRatedMovies"
-				title={"En Çok Oy Alanlar"}
-				desc="En çok oy almış filmler"
-				movies={topRatedMovies}
-				loading={loading}
-				error={error}
-			/> */}
-
 			{/* <div id="genres" className="mt-6">
 				<p className="font-bold text-2xl pb-2">genres</p>
 				<div className="grid grid-cols-4"> 

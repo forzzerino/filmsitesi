@@ -43,9 +43,9 @@ export async function fetchMovieDetails(movieId) {
 	return data;
 }
 
-export async function searchMovies(query) {
-	const data = await tmdbFetch(`/search/movie?query=${query}`);
-	return data.results;
+export async function searchMovies(query, page = 1) {
+	const data = await tmdbFetch(`/search/movie?query=${query}&page=${page}`);
+	return data;
 }
 
 export function getImageUrl(size = "original", posterPath) {

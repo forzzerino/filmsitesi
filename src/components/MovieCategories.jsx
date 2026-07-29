@@ -35,11 +35,15 @@ export default function MovieCategories({
 							}
 						})}
 					</div>
-					<div className="flex justify-center">
-						<Link to={`${route}`} className="w-64">
-							<button className="button-primary">Dahası</button>
-						</Link>
-					</div>
+					{route && (
+						<div className="flex justify-center">
+							<Link to={`${route}`} className="w-64">
+								<button className="button-primary">
+									Dahası
+								</button>
+							</Link>
+						</div>
+					)}
 				</div>
 			</section>
 		</>

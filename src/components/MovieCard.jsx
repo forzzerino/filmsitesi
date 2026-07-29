@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { getImageUrl } from "../services/filmservice";
+import { p } from "framer-motion/client";
 
 export default function MovieCard({ movie }) {
 	return (
@@ -8,10 +9,16 @@ export default function MovieCard({ movie }) {
 				<div className="block group overflow-hidden rounded-lg relative">
 					<div className="">
 						<div className="absolute top-0 left-0 h-full w-full bg-linear-to-t from-black from-20% to-transparent text-gray-300 p-4 opacity-0 flex flex-col justify-end gap-4 group-hover:opacity-100 items-end text-sm transition-all duration-300 z-10">
-							<p className="text-balance line-clamp-6">
-								{movie.overview}
-							</p>
-
+							{movie.overview && (
+								<p className="text-balance line-clamp-6">
+									{movie.overview}
+								</p>
+							)}
+							{!movie.overview && (
+								<p className="block w-full text-start">
+									Açıklama girilmemiş
+								</p>
+							)}
 							<button className="button-secondary">Devamı</button>
 						</div>
 						<img

@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { TopRatedSkeleton } from "./TopRatedSkeleton";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function TopRated({ movies, title, desc }) {
+export default function TopRated({ id, movies, title, desc }) {
 	const [loading, setLoading] = useState(false);
 	const [movie, setMovie] = useState([]);
 	const [index, setIndex] = useState(0);
@@ -18,10 +18,13 @@ export default function TopRated({ movies, title, desc }) {
 	useEffect(() => {
 		async function getMovie() {
 			try {
+				setLoading(true);
 				const data = await fetchMovieDetails(movies[index].id);
 				setMovie(data);
 			} catch (error) {
 				console.log("filmçekeilirkenhata", error);
+			} finally {
+				setLoading(false);
 			}
 		}
 		getMovie();
@@ -29,7 +32,7 @@ export default function TopRated({ movies, title, desc }) {
 
 	return (
 		<>
-			<section id={title} className="relative">
+			<section id={id} className="relative">
 				<div className="max-w-350 my-12 py-12 mx-auto">
 					{/* <div className="title mb-3">
 						<div className="font-bold text-3xl">{title}</div>
