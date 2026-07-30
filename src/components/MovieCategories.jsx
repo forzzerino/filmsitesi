@@ -8,6 +8,7 @@ export default function MovieCategories({
 	loading,
 	error,
 	route,
+	limit = 10,
 }) {
 	if (loading)
 		return (
@@ -27,13 +28,20 @@ export default function MovieCategories({
 						<div className="font-medium text-lg">{desc}</div>
 					</div>
 					<div className="filmcards grid grid-cols-5 gap-8 my-6">
-						{movies.map((movie, index) => {
-							if (index <= 9) {
-								return (
+						{limit
+							? movies.map((movie, index) => {
+									if (index < limit) {
+										return (
+											<MovieCard
+												key={movie.id}
+												movie={movie}
+											/>
+										);
+									}
+								})
+							: movies.map((movie) => (
 									<MovieCard key={movie.id} movie={movie} />
-								);
-							}
-						})}
+								))}
 					</div>
 					{route && (
 						<div className="flex justify-center">

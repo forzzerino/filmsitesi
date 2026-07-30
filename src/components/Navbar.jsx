@@ -1,42 +1,38 @@
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-
 import { Link, matchPath, useLocation, useNavigate } from "react-router";
 import { getImageUrl, searchMovies } from "../services/filmservice";
-
+import Spinner from "./Spinner";
 export default function Navbar() {
+	const [loaded, setLoaded] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const routes = [
 		{
-			name: "Keşfet",
+			name: "Trend",
 			path: "/movies/trending",
 		},
-		{
-			name: "Şimdi yayında",
-			path: "/movies/now-playing",
-		},
+		// {
+		// 	name: "Şimdi yayında",
+		// 	path: "/movies/now-playing",
+		// },
 		{
 			name: "Popüler",
 			path: "/movies/popular",
 		},
-		{
-			name: "Top 100",
-			path: "/movies/top-rated",
-		},
-		{
-			name: "Yakında",
-			path: "/movies/upcoming",
-		},
+		// {
+		// 	name: "Top 100",
+		// 	path: "/movies/top-rated",
+		// },
+		// {
+		// 	name: "Yakında",
+		// 	path: "/movies/upcoming",
+		// },
 	];
 	const transparentPages = ["/", "/movies/:id"];
 	const excludeFromTransparentPages = [
 		"/movies/search",
 		"/movies/trending",
 		"/movies/popular",
-		"/movies/top-rated",
-		"/movies/upcoming",
-		"/movies/now-playing",
 	];
 	const isTransparentPage =
 		!excludeFromTransparentPages.some((path) =>
@@ -65,10 +61,9 @@ export default function Navbar() {
 			setShowSearchingResults(false);
 			return;
 		}
-
+		setIsSearching(true);
 		const timer = setTimeout(async () => {
 			try {
-				setIsSearching(true);
 				const results = await searchMovies(query);
 				const data = results.results;
 				setSearchResults(data?.slice(0, 5));
@@ -119,17 +114,18 @@ export default function Navbar() {
 						))}
 					</div>
 					<div
-						className="w-64 group"
+						className="w-64 group transition-all duration-300"
 						ref={searchContainerRef}
 						onBlur={() =>
 							setTimeout(() => {
 								setShowSearchingResults(false);
 								setSearchQuery("");
-							}, 1000)
+								setIsSearching(false);
+							}, 200)
 						}
 					>
 						<div
-							className={`absolute -top-1 right-0 group w-64 rounded-full px-4 py-2 border border-gray-600 focus-within:w-72 transition-all 
+							className={`absolute -top-1 right-0 group w-64 rounded-md px-4 py-2 border border-gray-600 focus-within:w-80 focus-within:bg-neutral-900 transition-all 
                             ${isScrolled ? "backdrop-blur-2xl" : ""}`}
 						>
 							<form
@@ -172,43 +168,27 @@ export default function Navbar() {
 								</button>
 							</form>
 						</div>
-						{isSearching &&
-							createPortal(
-								<div
-									id="search-results"
-									className="fixed backdrop-blur-xl bg-neutral-900/50 border border-gray-700/50 shadow-lg top-14 right-16 p-4 rounded-lg z-50 w-80 text-gray-400"
-								>
-									<div className="flex justify-center">
-										<svg
-											className="mr-3 size-5 animate-spin "
-											viewBox="0 0 24 24"
-										>
-											<circle
-												cx="12"
-												cy="12"
-												r="10"
-												fill="none"
-												stroke="hsl(0 0% 100% / 0.25)"
-												strokeWidth="4"
-											/>
-											<path
-												fill="hsl(0 0% 100%)"
-												d="M22 12c0-5.523-4.477-10-10-10V0c6.627 0 12 5.373 12 12h-2z"
-											/>
-										</svg>
-									</div>
-								</div>,
-								document.body,
-							)}
+						{isSearching && (
+							<div
+								id="search-results"
+								className="absolute backdrop-blur-xl bg-neutral-900 border border-gray-700 shadow-lg top-10 right-0 p-4 rounded-lg z-50 w-80 text-gray-400"
+							>
+								<div className="w-full h-full flex justify-center items-center ">
+									<Spinner
+										color="text-neutral-400"
+										size={8}
+									/>
+								</div>
+							</div>
+						)}
 
 						{showSearchingResults &&
 							!isSearching &&
 							searchResults &&
-							searchResults.length > 0 &&
-							createPortal(
+							searchResults.length > 0 && (
 								<div
 									id="search-results"
-									className="fixed backdrop-blur-xl bg-neutral-900/50 border border-gray-700/50 shadow-lg top-14 right-16 p-4 rounded-lg z-50 w-80 text-gray-400"
+									className="absolute backdrop-blur-xl bg-neutral-900 border border-gray-700 shadow-lg top-10 right-0 p-4 rounded-lg z-50 w-80 text-gray-400"
 								>
 									{searchResults.map((result) => (
 										<Link
@@ -217,13 +197,22 @@ export default function Navbar() {
 											className=" border-gray-700 p-2 flex justify-between items-center hover:bg-neutral-800 transition-all duration-200 rounded-lg"
 										>
 											<div className="flex gap-2 items-center">
+												{!loaded && (
+													<div className="w-10 h-12 rounded-lg bg-neutral-500 flex items-center justify-center">
+														<Spinner />
+													</div>
+												)}
+
 												<img
-													className="w-10 h-auto rounded-sm"
+													className={`w-10 h-auto rounded-sm ${loaded ? "" : "hidden"}`}
 													src={getImageUrl(
 														"w92",
 														result.poster_path,
 													)}
 													alt={result.title}
+													onLoad={() =>
+														setLoaded(true)
+													}
 												/>
 												<p className="line-clamp-1">
 													{result.title}
@@ -237,24 +226,36 @@ export default function Navbar() {
 											</p>
 										</Link>
 									))}
-								</div>,
-								document.body,
+									<Link
+										to={`/movies/search?query=${encodeURIComponent(searchQuery)}`}
+										className=" border-gray-700 p-2 flex justify-between items-center hover:bg-neutral-800 transition-all duration-200 rounded-lg mt-2"
+									>
+										<div className="flex gap-2 items-center">
+											<p className="line-clamp-1 underline text-gray-300">
+												{" "}
+												{searchQuery
+													.charAt(0)
+													.toUpperCase() +
+													searchQuery?.slice(1)}{" "}
+												için daha çok sonuç
+											</p>
+										</div>
+									</Link>
+								</div>
 							)}
 
 						{showSearchingResults &&
 							!isSearching &&
 							searchResults &&
-							searchResults.length == 0 &&
-							createPortal(
+							searchResults.length == 0 && (
 								<div
 									id="search-results"
-									className="fixed backdrop-blur-xl bg-neutral-900/50 border border-gray-700/50 shadow-lg top-14 right-16 p-4 rounded-lg z-50 w-80 text-gray-400"
+									className="absolute backdrop-blur-xl bg-neutral-900 border border-gray-700 shadow-lg top-10 right-0 p-4 rounded-lg z-50 w-80 text-gray-400"
 								>
 									<div className="p-2 flex justify-between">
 										Film bulunamadi.
 									</div>
-								</div>,
-								document.body,
+								</div>
 							)}
 					</div>
 				</div>

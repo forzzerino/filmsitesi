@@ -16,23 +16,13 @@ export async function fetchTrendingMovies() {
 	return data.results;
 }
 
-export async function fetchPopularMovies() {
-	const data = await tmdbFetch("/movie/popular");
+export async function fetchPopularMovies(page = 1) {
+	const data = await tmdbFetch(`/movie/popular?page=${page}`);
 	return data.results;
-}
-
-export async function fetchGenres() {
-	const data = await tmdbFetch("/genre/movie/list");
-	return data.genres;
 }
 
 export async function fetchTopRatedMovies() {
 	const data = await tmdbFetch("/movie/top_rated");
-	return data.results;
-}
-
-export async function fetchMoviesByGenre(genreId) {
-	const data = await tmdbFetch(`/discover/movie?with_genres=${genreId}`);
 	return data.results;
 }
 
@@ -46,6 +36,28 @@ export async function fetchMovieDetails(movieId) {
 export async function searchMovies(query, page = 1) {
 	const data = await tmdbFetch(`/search/movie?query=${query}&page=${page}`);
 	return data;
+}
+
+export async function searchSimiliarMovies(movieId) {
+	const data = await tmdbFetch(`/movie/${movieId}/similar?page=1`);
+	return data.results;
+}
+
+export async function searchRecommendations(movieId, page = 1) {
+	const data = await tmdbFetch(
+		`/movie/${movieId}/recommendations?page=${page}`,
+	);
+	return data;
+}
+
+export async function fetchGenres() {
+	const data = await tmdbFetch("/genre/movie/list");
+	return data.genres;
+}
+
+export async function fetchMoviesByGenre(genreId) {
+	const data = await tmdbFetch(`/discover/movie?with_genres=${genreId}`);
+	return data.results;
 }
 
 export function getImageUrl(size = "original", posterPath) {

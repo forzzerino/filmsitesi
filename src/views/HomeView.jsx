@@ -1,10 +1,12 @@
 import { useMovies } from "../context/MoviesContext";
 import { Link } from "react-router";
-import MovieCategories from "./MovieCategories";
-import Hero from "./Hero";
-import TopRated from "./TopRated";
-import ErrorView from "../views/ErrorView";
-export default function Home() {
+import MovieCategories from "../components/MovieCategories";
+import Hero from "../components/Hero";
+import TopRated from "../components/TopRated";
+import ErrorView from "./ErrorView";
+import LoadingView from "./LoadingView";
+import Genres from "../components/Genres";
+export default function HomeView() {
 	const {
 		loading,
 		error,
@@ -16,11 +18,12 @@ export default function Home() {
 
 	const randomNumber = Math.floor(Math.random() * 20) + 1;
 
-	if (loading) return <div>Yükleniyor...</div>;
+	if (loading) return <LoadingView />;
 	if (error) return <ErrorView error={error.message} />;
 	return (
 		<>
 			<Hero movie={trendingMovies[randomNumber]} genres={genres} />
+			<Genres genres={genres} />
 			<MovieCategories
 				id="trendingMovies"
 				title={"Trending"}
@@ -29,6 +32,7 @@ export default function Home() {
 				loading={loading}
 				error={error}
 				route={"/movies/trending"}
+				limit={5}
 			/>
 
 			<TopRated
@@ -45,6 +49,7 @@ export default function Home() {
 				loading={loading}
 				error={error}
 				route={"/movies/popular"}
+				limit={5}
 			/>
 			{/* <div id="genres" className="mt-6">
 				<p className="font-bold text-2xl pb-2">genres</p>

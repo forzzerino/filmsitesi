@@ -2,7 +2,7 @@ export default function Pagination({
 	page,
 	totalPages,
 	setSearchParams,
-	query,
+	query = null,
 }) {
 	return (
 		<div className="pagination-buttons container mx-auto mb-6">

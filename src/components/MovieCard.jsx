@@ -1,8 +1,9 @@
 import { Link } from "react-router";
 import { getImageUrl } from "../services/filmservice";
-import { p } from "framer-motion/client";
-
+import Spinner from "./Spinner";
+import { useState } from "react";
 export default function MovieCard({ movie }) {
+	const [loaded, setLoaded] = useState(false);
 	return (
 		<div key={movie.id} className="moviecard group">
 			<Link to={`/movies/${movie.id}`} className="">
@@ -21,10 +22,16 @@ export default function MovieCard({ movie }) {
 							)}
 							<button className="button-secondary">Devamı</button>
 						</div>
+						{!loaded && (
+							<div className="h-96 w-full rounded-lg bg-gray-300 flex items-center justify-center">
+								<Spinner />
+							</div>
+						)}
 						<img
 							src={getImageUrl("w500", movie.poster_path)}
-							className="h-96 w-full rounded-lg object-cover cursor-pointer transition-all duration-300"
+							className={`${loaded ? "" : "hidden"} h-96 w-full rounded-lg object-cover cursor-pointer transition-all duration-300`}
 							alt={movie.title}
+							onLoad={() => setLoaded(true)}
 						/>
 					</div>
 				</div>
@@ -32,7 +39,7 @@ export default function MovieCard({ movie }) {
 					{movie.title}
 				</p>
 				<div className="flex flex-row justify-between items-center mt-1 font-mono text-sm tracking-tighter font-medium">
-					<p className="flex items-center gap-1 text-yellow-900  rounded-md px-1">
+					<p className="flex items-center gap-1 text-yellow-500  rounded-md px-1">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="12"
@@ -49,9 +56,7 @@ export default function MovieCard({ movie }) {
 						</svg>
 						{movie.vote_average.toFixed(1)}
 					</p>
-					<p className="">
-						{movie?.release_date?.split("-").reverse().join(".")}
-					</p>
+					<p className="">{movie?.release_date?.substring(0, 4)}</p>
 				</div>
 				{/* {movie.genre_ids.map((genre) => {
 									return <p>{genre.id}</p>;

@@ -80,11 +80,11 @@ html {
 }
 
 .button-primary {
-	@apply bg-primary p-2 w-full text-primary-foreground font-semibold cursor-pointer transition-all hover:bg-primary/90;
+	@apply bg-primary p-2 w-full text-primary-foreground font-semibold cursor-pointer transition-all hover:bg-primary/90 text-center;
 	border-radius: var(--radius);
 }
 
 .button-secondary {
-	@apply bg-secondary p-2 w-full text-secondary-foreground font-semibold cursor-pointer transition-all hover:bg-secondary/90;
+	@apply bg-secondary p-2 w-full text-secondary-foreground font-semibold cursor-pointer transition-all hover:bg-secondary/90 text-center;
 	border-radius: var(--radius);
 }

@@ -7,6 +7,7 @@ export default function Hero({ movie, genres }) {
 	const [backdrop, setBackDrop] = useState(null);
 	const [searchQuery, setSearchQuery] = useState("");
 	const navigate = useNavigate();
+	const [loading, setLoading] = useState(false);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -18,13 +19,15 @@ export default function Hero({ movie, genres }) {
 	}
 
 	useEffect(() => {
+		setLoading(true);
 		const backdrop = getImageUrl("w1280", movie.backdrop_path || null);
 		setBackDrop(backdrop);
 		const poster = getImageUrl("w500", movie.poster_path || null);
 		setPoster(poster);
-	}, []);
+		setLoading(false);
+	}, [movie]);
 
-	if (!movie) return null;
+	if (loading || !movie) return <LoadingView />;
 	return (
 		<>
 			<section id="hero" className="pt-20">

@@ -3,16 +3,16 @@ import ErrorView from "./ErrorView";
 import MovieCategories from "../components/MovieCategories";
 import LoadingView from "./LoadingView";
 import { useMovies } from "../context/MoviesContext";
-export default function SearchResultsView() {
-	const { trendingMovies } = useMovies();
+export default function PopularMoviesView() {
+	const { popularMovies } = useMovies();
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	useEffect(() => {
 		setLoading(true);
-		setMovies(trendingMovies);
+		setMovies(popularMovies);
 		setLoading(false);
-	}, [trendingMovies]);
+	}, [popularMovies]);
 
 	if (loading) {
 		return <LoadingView />;
@@ -25,9 +25,9 @@ export default function SearchResultsView() {
 			{!loading && !error && (
 				<div className="">
 					<MovieCategories
-						id={trendingMovies}
-						title={"Bu hafta trend filmler."}
-						desc={"Sizin için derledik"}
+						id={popularMovies}
+						title={"Popüler filmler."}
+						desc={"Bu ara çok izleniyorlar."}
 						movies={movies}
 						loading={loading}
 						error={error}
