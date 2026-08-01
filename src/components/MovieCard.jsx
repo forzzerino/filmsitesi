@@ -23,13 +23,13 @@ export default function MovieCard({ movie }) {
 							<button className="button-secondary">Devamı</button>
 						</div>
 						{!loaded && (
-							<div className="h-96 w-full rounded-lg bg-gray-300 flex items-center justify-center">
+							<div className="h-64 sm:h-80 lg:h-96 w-full rounded-lg bg-gray-300 flex items-center justify-center">
 								<Spinner />
 							</div>
 						)}
 						<img
 							src={getImageUrl("w500", movie.poster_path)}
-							className={`${loaded ? "" : "hidden"} h-96 w-full rounded-lg object-cover cursor-pointer transition-all duration-300`}
+							className={`${loaded ? "" : "hidden"} h-64 sm:h-80 lg:h-96 w-full rounded-lg object-cover cursor-pointer transition-all duration-300`}
 							alt={movie.title}
 							onLoad={() => setLoaded(true)}
 						/>
@@ -59,8 +59,8 @@ export default function MovieCard({ movie }) {
 					<p className="">{movie?.release_date?.substring(0, 4)}</p>
 				</div>
 				{/* {movie.genre_ids.map((genre) => {
-									return <p>{genre.id}</p>;
-								})} */}
+							return <p>{genre.id}</p>;
+						})} */}
 			</Link>
 		</div>
 	);

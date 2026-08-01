@@ -4,9 +4,9 @@ import { useState } from "react";
 export default function CastCard({ cast }) {
 	const [loaded, setLoaded] = useState(false);
 	return (
-		<div className="profile w-40 text-center">
+		<div className="profile w-full sm:w-40 text-center">
 			{!cast.profile_path ? (
-				<div className="w-40 h-60 rounded-lg bg-gray-300 flex items-center justify-center text-neutral-400">
+				<div className="w-full sm:w-40 h-60 rounded-lg bg-gray-300 flex items-center justify-center text-neutral-400">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="56"
@@ -25,9 +25,9 @@ export default function CastCard({ cast }) {
 					</svg>
 				</div>
 			) : (
-				<div className="relative w-40 h-auto">
+				<div className="relative w-full sm:w-40 h-auto">
 					{!loaded && (
-						<div className="w-40 h-60 rounded-lg bg-gray-300 flex items-center justify-center">
+						<div className="w-full sm:w-40 h-60 rounded-lg bg-gray-300 flex items-center justify-center">
 							<Spinner />
 						</div>
 					)}
@@ -35,7 +35,7 @@ export default function CastCard({ cast }) {
 					<img
 						src={getImageUrl("w185", cast.profile_path)}
 						alt={cast.name}
-						className={`rounded-lg w-40 ${loaded ? "" : "hidden"}`}
+						className={`rounded-lg w-full sm:w-40 ${loaded ? "" : "hidden"}`}
 						onLoad={() => setLoaded(true)}
 					/>
 				</div>

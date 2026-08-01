@@ -5,10 +5,10 @@ export default function Pagination({
 	query = null,
 }) {
 	return (
-		<div className="pagination-buttons container mx-auto mb-6">
+		<div className="pagination-buttons container mx-auto mb-6 px-4">
 			<div className="flex gap-4 p- justify-center">
 				<button
-					className="button button-secondary flex gap-4 justify-center border border-border shadow-sm w-36!"
+					className="button button-secondary flex gap-4 justify-center border border-border shadow-sm w-24! sm:w-36!"
 					disabled={page == 1}
 					onClick={() =>
 						setSearchParams({
@@ -41,7 +41,7 @@ export default function Pagination({
 					</p>
 				</div>
 				<button
-					className="button button-secondary flex gap-4 justify-center border border-border shadow-sm w-36!"
+					className="button button-secondary flex gap-4 justify-center border border-border shadow-sm w-24! sm:w-36!"
 					disabled={page == totalPages}
 					onClick={() =>
 						setSearchParams({

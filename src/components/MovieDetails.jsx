@@ -85,24 +85,24 @@ export default function MovieDetails() {
 		<>
 			{console.log(movie)}
 			<main id={movie.id}>
-				<div className="py-32 relative">
-					<div className="grid grid-cols-3 max-w-350 mx-auto ">
+				<div className="py-16 md:py-32 relative">
+					<div className="grid grid-cols-1 md:grid-cols-3 max-w-350 mx-auto px-4 lg:px-0">
 						<div className="">
 							<div className="image">
 								{!loaded && (
-									<div className="w-96 h-130 rounded-lg bg-gray-300 flex items-center justify-center">
+									<div className="w-full md:w-96 h-130 rounded-lg bg-gray-300 flex items-center justify-center">
 										<Spinner />
 									</div>
 								)}
 								<img
 									src={movie.poster_path}
 									alt={movie?.title}
-									className="rounded-md w-96 shadow-xl"
+									className="rounded-md w-full md:w-96 shadow-xl"
 									onLoad={() => setLoaded(true)}
 								/>
 							</div>
 						</div>
-						<div className="col-span-2 flex flex-col gap-4 pt-12 ">
+						<div className="col-span-1 md:col-span-2 flex flex-col gap-4 pt-6 md:pt-12">
 							{movie.tagline && (
 								<p className="font-mono text-gray-400 tracking-tight leading-tight text-lg">
 									{movie.tagline}
@@ -111,7 +111,7 @@ export default function MovieDetails() {
 							{movie.title && (
 								<h1
 									className={
-										"text-8xl font-bold leading-20 tracking-tighter text-gray-300 "
+										"text-4xl sm:text-6xl md:text-8xl font-bold leading-tight md:leading-20 tracking-tighter text-gray-300 "
 									}
 								>
 									{movie.title}
@@ -148,7 +148,7 @@ export default function MovieDetails() {
 									</span>
 								)}
 							</div>
-							<div className="flex gap-2 w-1/2 mt-6">
+							<div className="flex gap-2 w-full md:w-1/2 mt-6">
 								<Link className="button-primary flex justify-center items-center gap-2">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -197,8 +197,8 @@ export default function MovieDetails() {
 						<div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
 					</div>
 				</div>
-				<section className="max-w-350 my-12 mx-auto flex flex-col gap-16 pb-8">
-					<div className="details grid grid-cols-2 gap-12">
+				<section className="max-w-350 my-12 mx-auto flex flex-col gap-16 pb-8 px-4 lg:px-0">
+					<div className="details grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
 						<div className="grid-cols-1">
 							<div className="title mb-3">
 								<div className="font-bold text-3xl">
@@ -304,7 +304,7 @@ export default function MovieDetails() {
 							<div className="border border-border rounded-xl p-6 bg-white">
 								<div className="flex flex-row items-end gap-2 align-bottom font-mono">
 									<p
-										className={`text-4xl font-extrabold tracking-tighter ${getVoteColor()}`}
+										className={`text-4xl font-extrabold tracking-tighter ${getVoteColor("text")}`}
 									>
 										{movie.vote_average}
 									</p>
@@ -314,7 +314,13 @@ export default function MovieDetails() {
 								</div>
 								<div className="h-2 w-full bg-neutral-300 rounded-full my-2">
 									<div
-										className={`w-full h-full rounded-full ${getVoteColor("bg")}`}
+										className={`h-full rounded-full ${
+											movie.vote_average >= 7.5
+												? `bg-green-500`
+												: movie.vote_average >= 6
+													? `bg-yellow-500`
+													: `bg-red-500`
+										}`}
 										style={{
 											width: `${movie.vote_average * 10}%`,
 										}}
@@ -382,7 +388,7 @@ export default function MovieDetails() {
 								<div className="font-bold text-3xl">Cast</div>
 								{/* <div className="font-medium text-lg">Bişiler</div> */}
 							</div>
-							<div className="grid grid-cols-8 mt-6">
+							<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 mt-6">
 								{movie.credits.cast.slice(0, 8).map((cast) => (
 									<CastCard cast={cast} key={cast.id} />
 								))}
@@ -395,7 +401,7 @@ export default function MovieDetails() {
 								<div className="font-bold text-3xl">Crew</div>
 								{/* <div className="font-medium text-lg">Bişiler</div> */}
 							</div>
-							<div className="grid grid-cols-8 mt-6">
+							<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 mt-6">
 								{movie?.credits?.crew
 									.slice(0, 4)
 									.map((crew) => (
@@ -472,7 +478,7 @@ export default function MovieDetails() {
 						</div>
 						{recommendations.length > 0 && (
 							<div className="">
-								<div className="grid grid-cols-5 gap-4 my-6">
+								<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 my-6">
 									{recommendations.map((recommendedMovie) => (
 										<MovieCard
 											key={recommendedMovie.id}

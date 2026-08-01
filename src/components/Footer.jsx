@@ -3,7 +3,7 @@ export default function Footer() {
 	const year = new Date().getFullYear();
 	return (
 		<footer className="bg-neutral-900 text-white p-4 shadow-lg border-b border-gray-700 sticky top-0 z-50">
-			<div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+			<div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
 				<h1 className="text-3xl font-extrabold mb-4 md:mb-0">
 					<Link to={"/"}>Filmsitesi</Link>
 				</h1>

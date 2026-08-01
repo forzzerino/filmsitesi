@@ -33,14 +33,14 @@ export default function TopRated({ id, movies, title, desc }) {
 	return (
 		<>
 			<section id={id} className="relative">
-				<div className="max-w-350 my-12 py-12 mx-auto">
+				<div className="max-w-350 my-12 py-12 mx-auto px-4 lg:px-0">
 					{/* <div className="title mb-3">
 						<div className="font-bold text-3xl">{title}</div>
 						<div className="font-medium text-lg">{desc}</div>
 					</div> */}
 					{loading && <TopRatedSkeleton />}
 					{!loading && movie && (
-						<div className=" mx-auto max-w-200 flex flex-col gap-6">
+						<div className=" mx-auto max-w-full lg:max-w-200 flex flex-col gap-6">
 							<motion.div
 								key={movie.id}
 								initial={{ opacity: 0, x: 0 }}
@@ -48,27 +48,27 @@ export default function TopRated({ id, movies, title, desc }) {
 								exit={{ opacity: 0, x: 0 }}
 								transition={{ duration: 1 }}
 							>
-								<div className="bg-gray-100 flex flex-row rounded-xl shadow-2xl">
+								<div className="bg-gray-100 flex flex-col md:flex-row rounded-xl shadow-2xl">
 									{movie?.poster_path && (
 										<img
 											src={getImageUrl(
 												"w500",
 												movie.poster_path,
 											)}
-											className="w-96 rounded-xl rounded-r-none"
+											className="w-full md:w-96 h-64 md:h-auto object-cover rounded-xl md:rounded-xl md:rounded-r-none"
 											alt={movie.title}
 										/>
 									)}
 
 									<div className="flex flex-col justify-between">
-										<div className="p-8 flex flex-col gap-4 text-xl">
+										<div className="p-6 md:p-8 flex flex-col gap-4 text-xl">
 											<div className="font-mono text-gray-500 text-sm flex justify-between items-center">
 												<span>En çok oy almışlar</span>
 												<p className="font-bold border px-2 py-0.5 text-sm rounded-full">
 													#{index + 1}
 												</p>
 											</div>
-											<p className="text-4xl font-extrabold tracking-tight">
+											<p className="text-2xl md:text-4xl font-extrabold tracking-tight">
 												{movie.title}
 											</p>
 											<div className="font-mono flex flex-row text-base justify-between text-gray-500">
@@ -129,7 +129,7 @@ export default function TopRated({ id, movies, title, desc }) {
 													</span>
 												</p>
 											)}
-											<div className="mt-12">
+											<div className="mt-6 md:mt-12">
 												<Link
 													to={`/movies/${movie.id}`}
 												>
@@ -158,7 +158,7 @@ export default function TopRated({ id, movies, title, desc }) {
 									</div>
 								</div>
 							</motion.div>
-							<div className="flex gap-4 w-64 mx-auto z-10">
+							<div className="flex gap-4 w-full sm:w-64 mx-auto z-10">
 								<button
 									className="button-secondary ring-2 ring-gray-400 text-gray-500! hover:bg-gray-300!"
 									onClick={handlePrevClick}

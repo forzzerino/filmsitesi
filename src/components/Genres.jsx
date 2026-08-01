@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Genres({ genres }) {
 	const [selectedGenre, setSelectedGenre] = useState(null);
 	return (
-		<div className="max-w-350 my-12 mx-auto">
+		<div className="max-w-350 my-12 mx-auto px-4 lg:px-0">
 			<div className="title mb-3">
 				<div className="font-bold text-3xl"># Türler</div>
 				<div className="font-medium text-lg"></div>
@@ -14,7 +14,7 @@ export default function Genres({ genres }) {
 						<button
 							key={genre.id}
 							onClick={() => setSelectedGenre(genre.id)}
-							className={`${selectedGenre === genre.id ? "button-primary" : "button-secondary border border-border "} w-28!`}
+							className={`${selectedGenre === genre.id ? "button-primary" : "button-secondary border border-border "} w-full sm:w-28!`}
 						>
 							<p>{genre.name}</p>
 							<p>{genre.id}</p>

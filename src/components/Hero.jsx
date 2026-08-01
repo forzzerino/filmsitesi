@@ -31,21 +31,21 @@ export default function Hero({ movie, genres }) {
 	return (
 		<>
 			<section id="hero" className="pt-20">
-				<div className="max-w-350 mx-auto grid grid-cols-2 p-6 py-12">
+				<div className="max-w-350 mx-auto grid grid-cols-1 md:grid-cols-2 px-4 lg:px-6 py-10 md:py-12">
 					<div className="my-auto">
 						<div className="select-none">
 							<p className="font-mono pl-2 text-gray-500">
 								Özenle seçilmiş bir sinema koleksiyonu.
 							</p>
 
-							<p className="text-9xl font-bold leading-28 tracking-tighter text-secondary">
+							<p className="text-5xl sm:text-7xl md:text-9xl font-bold leading-tight md:leading-28 tracking-tighter text-secondary">
 								Herhangi
 								<br />
 								<span className="">1</span>
 								Filmsitesi.
 							</p>
 						</div>
-						<div className="group mt-12 border-b-2 border-white text-white">
+						<div className="group mt-8 md:mt-12 border-b-2 border-white text-white">
 							<form
 								onSubmit={handleSubmit}
 								className="flex items-center gap-2 "
@@ -103,17 +103,17 @@ export default function Hero({ movie, genres }) {
 							</form>
 						</div>
 					</div>
-					<div className="flex text-gray-300">
+					<div className="flex text-gray-300 mt-8 md:mt-0">
 						<div className=" flex flex-col mx-auto gap-2">
 							<div className="image">
 								<img
 									src={poster}
 									alt={movie?.title}
-									className="rounded-md w-96"
+									className="rounded-md w-full md:w-96"
 								/>
 							</div>
 							<div className="flex items-center justify-between">
-								<p className="text-2xl font-bold">
+								<p className="text-xl md:text-2xl font-bold">
 									{movie?.title}
 								</p>
 							</div>
@@ -147,7 +147,7 @@ export default function Hero({ movie, genres }) {
 									</span>
 								)}
 							</div>
-							<div className="flex gap-2 pt-6">
+							<div className="flex gap-2 pt-4 md:pt-6">
 								<Link
 									className="button-primary text-center"
 									to={`/movies/${movie?.id}`}
