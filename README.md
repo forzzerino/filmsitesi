@@ -1,34 +1,32 @@
 # herhangi1filmsitesi
 
-React temellerini hatırlamak ve pratik yapmak için geliştirilen bir film keşif sitesi. TMDB API kullanılarak _şimdilik_ trend, popüler ve en çok oy alan filmler listelenir.
+React temellerini hatırlamak, pratik yapmak ve modern web tasarım standartlarını denemek için geliştirilen bir film keşif sitesi. TMDB API kullanılarak vizyondaki, trend olan, popüler, en çok oy alan ve yakında çıkacak filmler listelenir. Aynı zamanda filtreleme ve arama özellikleri ile kullanıcıların yeni filmler keşfetmesi hedeflenmiştir.
+
+## Özellikler
+
+- **Geniş Kapsamlı Film Listeleri:** Trend, Popüler, En Çok Oy Alanlar ve Yaklaşan Filmler.
+- **Detaylı Film Keşfetme (Discover):** Kategori, yayın yılı, sıralama ölçütü ve minimum oy oranına göre gelişmiş filtreleme mekanizması.
+- **Canlı Arama:** Arama çubuğu üzerinden anlık sonuç görüntüleme.
+- **Film Detayları:** Seçilen bir filmin konusu, oyuncu kadrosu (cast & crew), afişleri ve benzer/önerilen filmlerinin gösterilmesi.
 
 ## Teknolojiler
 
 - **React 19** — UI
-- **React Router** — Sayfa yönlendirme
+- **React Router** — Routing
 - **Tailwind CSS v4** — Stil
-- **Vite** — Build & dev server
+- **Framer Motion** - Animasyon
 - **TMDB API** — Film verileri
 
 ## Proje Yapısı
 
 ```
-src/
-├── components/        # UI bileşenleri
-│   ├── Hero.jsx       # Ana sayfa hero bölümü
-│   ├── Home.jsx       # Ana sayfa
-│   ├── MovieCard.jsx  # Tekil film kartı
-│   ├── MovieCategories.jsx  # Film kategorisi listesi
-│   ├── MovieDetails.jsx     # Film detay sayfası
-│   ├── Navbar.jsx     # Üst menü
-│   └── Footer.jsx     # Alt menü
-├── context/           # React Context (global state)
-│   └── MoviesContext.jsx
-├── layouts/           # Sayfa iskeletleri
-│   └── MainLayout.jsx
-├── services/          # API çağrıları
-│   └── filmservice.js
-└── main.jsx           # Uygulama giriş noktası
+├── components/        # UI bileşenleri (Hero, Navbar, TopRated, HomeMovieCard, DiscoverFilters, vb.)
+├── context/           # React Context - Global State (MoviesContext)
+├── layouts/           # Page structure (MainLayout)
+├── services/          # API calls (filmservice.js, filterservice.js)
+├── views/             # Pages (HomeView, DiscoverMovieView, SearchResultsView, MovieDetails, vb.)
+├── main.jsx
+└── index.css
 ```
 
 ## Kurulum
@@ -37,15 +35,13 @@ src/
 npm install
 ```
 
-Proje kök dizinine `.env` dosyası oluştur:
+Proje kök dizinine `.env` dosyası oluştur
 
 ```
 VITE_TMDB_API_KEY=senin_api_anahtarin
 ```
 
 API anahtarını [TMDB](https://www.themoviedb.org/settings/api) üzerinden alabilirsin.
-
-## Çalıştırma
 
 ```bash
 npm run dev
