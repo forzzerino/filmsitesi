@@ -8,9 +8,14 @@ export default function Navbar() {
 	const navigate = useNavigate();
 	const routes = [
 		{
+			name: "Keşfet",
+			path: "/movies/discover",
+		},
+		{
 			name: "Trend",
 			path: "/movies/trending",
 		},
+
 		// {
 		// 	name: "Şimdi yayında",
 		// 	path: "/movies/now-playing",
@@ -33,6 +38,7 @@ export default function Navbar() {
 		"/movies/search",
 		"/movies/trending",
 		"/movies/popular",
+		"/movies/discover",
 	];
 	const isTransparentPage =
 		!excludeFromTransparentPages.some((path) =>

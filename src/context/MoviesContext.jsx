@@ -4,9 +4,7 @@ import {
 	fetchPopularMovies,
 	fetchGenres,
 	fetchTopRatedMovies,
-	fetchMoviesByGenre,
-	fetchMovieDetails,
-	searchMovies,
+	fetchUpcomingMovies,
 } from "../services/filmservice";
 
 const MoviesContext = createContext();
@@ -27,27 +25,30 @@ export const MoviesProvider = ({ children }) => {
 	const [trendingMovies, setTrendingMovies] = useState([]);
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [topRatedMovies, setTopRatedMovies] = useState([]);
+	const [upcomingMovies, setUpcomingMovies] = useState([]);
 	const [genres, setGenres] = useState([]);
-	const [selectedGenre, setSelectedGenre] = useState(null);
-	const [moviesByGenre, setMoviesByGenre] = useState([]);
-	const [selectedMovieId, setSelectedMovieId] = useState(null);
-	const [movieDetails, setMovieDetails] = useState(null);
-	const [searchResults, setSearchResults] = useState([]);
 
 	useEffect(() => {
 		async function loadMovies() {
 			try {
 				setLoading(true);
-				const [trendingMovies, popularMovies, topRatedMovies, genres] =
-					await Promise.all([
-						fetchTrendingMovies(),
-						fetchPopularMovies(),
-						fetchTopRatedMovies(),
-						fetchGenres(),
-					]);
+				const [
+					trendingMovies,
+					popularMovies,
+					topRatedMovies,
+					upcomingMovies,
+					genres,
+				] = await Promise.all([
+					fetchTrendingMovies(),
+					fetchPopularMovies(),
+					fetchTopRatedMovies(),
+					fetchUpcomingMovies(),
+					fetchGenres(),
+				]);
 				setTrendingMovies(trendingMovies);
 				setPopularMovies(popularMovies);
 				setTopRatedMovies(topRatedMovies);
+				setUpcomingMovies(upcomingMovies);
 				setGenres(genres);
 			} catch (error) {
 				setError(error);
@@ -64,11 +65,20 @@ export const MoviesProvider = ({ children }) => {
 			trendingMovies,
 			popularMovies,
 			topRatedMovies,
+			upcomingMovies,
 			genres,
 			error,
 			loading,
 		}),
-		[trendingMovies, popularMovies, topRatedMovies, genres, error, loading],
+		[
+			trendingMovies,
+			popularMovies,
+			topRatedMovies,
+			upcomingMovies,
+			genres,
+			error,
+			loading,
+		],
 	);
 
 	return (

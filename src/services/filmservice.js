@@ -66,3 +66,22 @@ export function getImageUrl(size = "original", posterPath) {
 	}
 	return `${imgBaseUrl}/${size}${posterPath}`;
 }
+
+export async function fetchUpcomingMovies() {
+	const date = new Date();
+	const formattedDate = `${date.getFullYear()}-${String(
+		date.getMonth() + 1,
+	).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+
+	const data = await tmdbFetch(
+		`/discover/movie?primary_release_date.gte=${formattedDate}&sort_by=popularity.desc&with_genres=28%7C12%7C35`,
+	);
+	return data.results;
+}
+
+export async function discoverMovie(params) {
+	///discover/movie?primary_release_year=2026&sort_by=popularity.desc&vote_average.gte=7&with_genres=28
+
+	const data = await tmdbFetch(`/discover/movie?${params}`);
+	return data;
+}

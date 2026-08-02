@@ -8,6 +8,7 @@ import TrendingMovies from "./views/TrendingMoviesView";
 import SearchResultsView from "./views/SearchResultsView";
 import PopularMoviesView from "./views/PopularMoviesView";
 import MovieRecommendationsView from "./views/MovieRecommendationsView";
+import DiscoverMovieView from "./views/DiscoverMovieView";
 
 function App() {
 	return (
@@ -19,6 +20,10 @@ function App() {
 					<Route
 						path="movies/search"
 						element={<SearchResultsView />}
+					/>
+					<Route
+						path="movies/discover"
+						element={<DiscoverMovieView />}
 					/>
 					<Route
 						path="movies/trending"

@@ -33,14 +33,10 @@ export default function TopRated({ id, movies, title, desc }) {
 	return (
 		<>
 			<section id={id} className="relative">
-				<div className="max-w-350 my-12 py-12 mx-auto px-4 lg:px-0">
-					{/* <div className="title mb-3">
-						<div className="font-bold text-3xl">{title}</div>
-						<div className="font-medium text-lg">{desc}</div>
-					</div> */}
+				<div className="">
 					{loading && <TopRatedSkeleton />}
 					{!loading && movie && (
-						<div className=" mx-auto max-w-full lg:max-w-200 flex flex-col gap-6">
+						<div className="mx-auto max-w-full lg:max-w-200 flex flex-col gap-6 py-4">
 							<motion.div
 								key={movie.id}
 								initial={{ opacity: 0, x: 0 }}
