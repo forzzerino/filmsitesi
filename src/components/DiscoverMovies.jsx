@@ -20,8 +20,8 @@ export default function DiscoverMovies({
 	return (
 		<>
 			<section id={id}>
-				<div className="max-w-350 mb-12 mx-auto px-4 lg:px-0">
-					<div className="filmcards grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 my-6">
+				<div className="max-w-350 mb-12 mx-auto px-0">
+					<div className="filmcards grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8 my-6">
 						{limit
 							? movies.map((movie, index) => {
 									if (index < limit) {

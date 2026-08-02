@@ -19,9 +19,9 @@ export default function DiscoverFilters({ searchParams, setSearchParams }) {
 		});
 	}
 	return (
-		<div className="px-2 py-4">
-			<div className="container grid max-w-350 mx-auto">
-				<div className="flex flex-row gap-4">
+		<div className="md:px-2 md:py-4">
+			<div className="container max-w-350 mx-auto">
+				<div className="flex flex-row flex-wrap gap-4">
 					<Select
 						options={genres}
 						value={

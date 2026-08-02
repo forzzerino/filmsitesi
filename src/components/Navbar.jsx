@@ -107,9 +107,11 @@ export default function Navbar() {
             ${isTransparentPage && !isScrolled ? "bg-transparent" : ""}
             ${isTransparentPage && isScrolled ? "bg-neutral-900/50 backdrop-blur-xl shadow-lg" : ""}
             ${!isTransparentPage ? "bg-neutral-900" : ""}
+            ${menuOpen && isTransparentPage ? "bg-neutral-900/50! backdrop-blur-xl shadow-lg" : ""}
+
             `}
 		>
-			<div className="max-w-350 mx-auto py-3 md:py-4">
+			<div className=" max-w-350 mx-auto py-3 md:py-4">
 				<div className="relative flex justify-between items-center gap-4">
 					{/* Logo */}
 					<h1 className="text-3xl font-semibold">
@@ -223,6 +225,7 @@ export default function Navbar() {
 														result.poster_path,
 													)}
 													alt={result.title}
+													loading="lazy"
 													onLoad={() =>
 														setLoaded(true)
 													}
@@ -280,7 +283,6 @@ export default function Navbar() {
 						aria-label="Menüyü aç/kapat"
 					>
 						{menuOpen ? (
-							/* X icon */
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="28"
@@ -296,7 +298,6 @@ export default function Navbar() {
 								<path d="m6 6 12 12" />
 							</svg>
 						) : (
-							/* Hamburger icon */
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="28"
@@ -318,7 +319,7 @@ export default function Navbar() {
 
 				{/* Mobile menu */}
 				{menuOpen && (
-					<div className="md:hidden mt-3 pb-4 flex flex-col gap-3 border-t border-gray-700 pt-4">
+					<div className=" md:hidden mt-3 pb-4 flex flex-col gap-3 border-t border-gray-700 pt-4">
 						{routes.map((route) => (
 							<Link
 								to={route.path}

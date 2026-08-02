@@ -30,15 +30,15 @@ export default function Hero({ movie, genres }) {
 	if (loading || !movie) return <LoadingView />;
 	return (
 		<>
-			<section id="hero" className="pt-20">
-				<div className="max-w-350 mx-auto grid grid-cols-1 md:grid-cols-2 px-4 lg:px-6 py-10 md:py-12">
+			<section id="hero" className="pt-20 relative">
+				<div className="max-w-350 mx-auto grid grid-cols-1 md:grid-cols-2 px-4 lg:px-6 py-10 md:py-12 ">
 					<div className="my-auto">
 						<div className="select-none">
-							<p className="font-mono pl-2 text-gray-500">
+							<p className="text-sm md:text-base font-mono  text-gray-500">
 								Özenle seçilmiş bir sinema koleksiyonu.
 							</p>
 
-							<p className="text-5xl sm:text-7xl md:text-9xl font-bold leading-tight md:leading-28 tracking-tighter text-secondary">
+							<p className=" text-6xl md:text-7xl lg:text-9xl font-bold leading-12 md:leading-tight lg:leading-28 tracking-tighter text-secondary">
 								Herhangi
 								<br />
 								<span className="">1</span>
@@ -103,12 +103,13 @@ export default function Hero({ movie, genres }) {
 							</form>
 						</div>
 					</div>
-					<div className="flex text-gray-300 mt-8 md:mt-0">
-						<div className=" flex flex-col mx-auto gap-2">
+					<div className="flex text-gray-300 mt-8 md:mt-0 ">
+						<div className="flex flex-col mx-auto gap-2">
 							<div className="image">
 								<img
 									src={poster}
 									alt={movie?.title}
+									loading="lazy"
 									className="rounded-md w-full md:w-96"
 								/>
 							</div>
@@ -165,7 +166,8 @@ export default function Hero({ movie, genres }) {
 					<img
 						src={backdrop}
 						alt={movie?.title}
-						className="absolute top-0 left-0 w-full h-full object-cover -z-50"
+						loading="lazy"
+						className="absolute top-0 left-0  w-full h-full object-cover -z-50"
 					/>
 					<div className="absolute top-0 -z-10 left-0 w-full h-full bg-black opacity-80 blur-xl "></div>
 				</div>

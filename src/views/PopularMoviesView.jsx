@@ -23,7 +23,7 @@ export default function PopularMoviesView() {
 	return (
 		<>
 			{!loading && !error && (
-				<div className="">
+				<div className="max-w-350 my-6 md:my-12 mx-auto px-4 lg:px-0">
 					<MovieCategories
 						id={popularMovies}
 						title={"Popüler filmler."}

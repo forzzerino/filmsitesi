@@ -90,34 +90,34 @@ export default function MovieDetails() {
 						<div className="">
 							<div className="image">
 								{!loaded && (
-									<div className="w-full md:w-96 h-130 rounded-lg bg-gray-300 flex items-center justify-center">
+									<div className=" md:w-96 h-130 rounded-lg bg-gray-300 flex items-center justify-center">
 										<Spinner />
 									</div>
 								)}
 								<img
 									src={movie.poster_path}
 									alt={movie?.title}
-									className="rounded-md w-full md:w-96 shadow-xl"
+									className="rounded-md w-3/4 mx-auto md:mx-0 md:w-96 shadow-xl"
 									onLoad={() => setLoaded(true)}
 								/>
 							</div>
 						</div>
 						<div className="col-span-1 md:col-span-2 flex flex-col gap-4 pt-6 md:pt-12">
 							{movie.tagline && (
-								<p className="font-mono text-gray-400 tracking-tight leading-tight text-lg">
+								<p className="font-mono text-center text-sm md:text-left text-gray-400 tracking-tight leading-tight md:text-lg">
 									{movie.tagline}
 								</p>
 							)}
 							{movie.title && (
 								<h1
 									className={
-										"text-4xl sm:text-6xl md:text-8xl font-bold leading-tight md:leading-20 tracking-tighter text-gray-300 "
+										"text-3xl text-center md:text-left sm:text-6xl md:text-8xl font-bold leading-tight md:leading-20 tracking-tighter text-gray-300"
 									}
 								>
 									{movie.title}
 								</h1>
 							)}
-							<div className="text-gray-300 w-3/4 flex font-mono tracking-tight leading-tight text-lg gap-2 mt-6">
+							<div className="text-gray-300 w-full md:w-3/4 flex font-mono tracking-tight leading-tight justify-center md:justify-start md:text-lg gap-2 md:mt-6 ">
 								{/* {movie.genres?.map((genre) => (
 								<div key={genre.id} className="">
 									<span>{genre.name}</span>
@@ -148,7 +148,7 @@ export default function MovieDetails() {
 									</span>
 								)}
 							</div>
-							<div className="flex gap-2 w-full md:w-1/2 mt-6">
+							<div className="flex gap-2 w-full md:w-1/2 md:mt-6">
 								<Link className="button-primary flex justify-center items-center gap-2">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +182,7 @@ export default function MovieDetails() {
 								</button>
 							</div>
 							{movie.overview && (
-								<p className="font-mono text-lg tracking-tight leading-tight text-gray-400 mt-6">
+								<p className="font-mono md:text-lg tracking-tight leading-tight text-gray-400 mt-6">
 									{movie.overview}
 								</p>
 							)}
@@ -301,14 +301,14 @@ export default function MovieDetails() {
 							<div className="title mb-3">
 								<div className="font-bold text-3xl">Rating</div>
 							</div>
-							<div className="border border-border rounded-xl p-6 bg-white">
+							<div className="border border-border rounded-xl p-3 md:p-6 bg-white">
 								<div className="flex flex-row items-end gap-2 align-bottom font-mono">
 									<p
-										className={`text-4xl font-extrabold tracking-tighter ${getVoteColor("text")}`}
+										className={`text-2xl md:text-4xl font-extrabold tracking-tighter ${getVoteColor("text")}`}
 									>
 										{movie.vote_average}
 									</p>
-									<p className="text-xl tracking-tighter text-neutral-500">
+									<p className="md:text-xl tracking-tighter text-neutral-500">
 										/ 10
 									</p>
 								</div>
@@ -326,7 +326,7 @@ export default function MovieDetails() {
 										}}
 									></div>
 								</div>
-								<p className="font-semibold text-neutral-500 font-mono tracking-tigher">
+								<p className="text-sm md:text-base font-semibold text-neutral-500 font-mono tracking-tigher">
 									{movie.vote_count} oy üzerinden
 								</p>
 							</div>
@@ -388,7 +388,7 @@ export default function MovieDetails() {
 								<div className="font-bold text-3xl">Cast</div>
 								{/* <div className="font-medium text-lg">Bişiler</div> */}
 							</div>
-							<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 mt-6">
+							<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 mt-6 gap-y-4 md:gap-y-0 gap-2">
 								{movie.credits.cast.slice(0, 8).map((cast) => (
 									<CastCard cast={cast} key={cast.id} />
 								))}
@@ -401,7 +401,7 @@ export default function MovieDetails() {
 								<div className="font-bold text-3xl">Crew</div>
 								{/* <div className="font-medium text-lg">Bişiler</div> */}
 							</div>
-							<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 mt-6">
+							<div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 mt-6 gap-y-4 md:gap-y-0 gap-2">
 								{movie?.credits?.crew
 									.slice(0, 4)
 									.map((crew) => (
@@ -422,14 +422,14 @@ export default function MovieDetails() {
 								{movie?.images?.posters
 									?.slice(0, 4)
 									.map((poster) => (
-										<div className="profile text-center">
+										<div className="profile text-center w-36 md:w-auto">
 											<img
 												src={getImageUrl(
 													"w500",
 													poster.file_path,
 												)}
 												alt={poster.name}
-												className="rounded-lg w-40"
+												className="rounded-lg  md:w-40"
 											/>
 										</div>
 									))}
@@ -478,7 +478,7 @@ export default function MovieDetails() {
 						</div>
 						{recommendations.length > 0 && (
 							<div className="">
-								<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 my-6">
+								<div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 gap-4 my-6">
 									{recommendations.map((recommendedMovie) => (
 										<MovieCard
 											key={recommendedMovie.id}
@@ -488,7 +488,7 @@ export default function MovieDetails() {
 								</div>
 								<div className="flex justify-center">
 									<Link
-										className="button-secondary w-48! border border-border"
+										className="button-primary w-48! border border-border"
 										to={`/movies/${movie.id}/recommendations`}
 									>
 										Tüm Öneriler

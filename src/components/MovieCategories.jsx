@@ -31,7 +31,7 @@ export default function MovieCategories({
 							<div className="font-medium text-lg">{desc}</div>
 						)}
 					</div>
-					<div className="filmcards grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 my-6">
+					<div className="filmcards grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 my-6">
 						{limit
 							? movies.map((movie, index) => {
 									if (index < limit) {

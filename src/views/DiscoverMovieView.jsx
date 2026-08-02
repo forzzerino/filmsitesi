@@ -40,18 +40,20 @@ export default function DiscoverMovieView() {
 		return <ErrorView message={error} />;
 	}
 	return (
-		<div className="max-w-350 my-12 mx-auto px-4 lg:px-0">
-			<div className="flex justify-between items-center">
+		<div className="max-w-350 my-6 md:my-12 mx-auto px-4 lg:px-0">
+			<div className="flex flex-col md:flex-row justify-between md:items-center">
 				<div className="title mb-3">
 					<div className="font-bold text-3xl">Filmleri Keşfet</div>
 					<div className="font-medium text-lg">
 						{totalResults} film bulundu.
 					</div>
 				</div>
-				<DiscoverFilters
-					searchParams={searchParams}
-					setSearchParams={setSearchParams}
-				/>
+				<div className="block">
+					<DiscoverFilters
+						searchParams={searchParams}
+						setSearchParams={setSearchParams}
+					/>
+				</div>
 			</div>
 
 			<DiscoverMovies

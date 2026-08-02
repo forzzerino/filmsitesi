@@ -6,7 +6,7 @@ export default function CastCard({ cast }) {
 	return (
 		<div className="profile w-full sm:w-40 text-center">
 			{!cast.profile_path ? (
-				<div className="w-full sm:w-40 h-60 rounded-lg bg-gray-300 flex items-center justify-center text-neutral-400">
+				<div className="w-full sm:w-40  md:h-60 h-30 rounded-lg bg-gray-300 flex items-center justify-center text-neutral-400">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="56"
@@ -40,7 +40,7 @@ export default function CastCard({ cast }) {
 					/>
 				</div>
 			)}
-			<p className="font-bold text-lg mt-2">{cast.name}</p>
+			<p className="font-bold md:text-lg mt-2">{cast.name}</p>
 			<p className="text-gray-500 text-sm">{cast.known_for_department}</p>
 		</div>
 	);

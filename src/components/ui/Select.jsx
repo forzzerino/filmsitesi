@@ -28,16 +28,16 @@ export default function Select({
 		<div ref={ref} className="relative">
 			<button
 				onClick={() => setIsOpen(!isOpen)}
-				className="w-full cursor-pointer bg-background border border-border p-2 font-semibold text-neutral-500 flex gap-4 justify-between items-center rounded-lg min-w-32 leading-tight"
+				className="w-full cursor-pointer bg-background border border-border p-1 md:p-2 font-semibold text-neutral-500 flex gap-4 justify-between items-center rounded-lg min-w-32 leading-tight"
 			>
-				<p className="flex flex-col font-bold text-left">
+				<p className="text-sm md:text-base flex flex-col font-bold text-left">
 					{placeholder}
 					{value?.name ? (
-						<span className="text-neutral-700 text-sm font-medium tracking-tight">
+						<span className="text-neutral-700 text-xs md:text-sm font-medium tracking-tight">
 							{value?.name}
 						</span>
 					) : (
-						<span className="text-neutral-400 text-sm font-medium tracking-tight">
+						<span className="text-neutral-400 text-xs md:text-sm font-medium tracking-tight">
 							Seçilmemiş
 						</span>
 					)}
@@ -77,12 +77,12 @@ export default function Select({
 			{isOpen && (
 				<ul
 					style={{ gridTemplateRows: `repeat(${rows}, auto)` }}
-					className={`absolute grid cursor-pointer grid-flow-col font-semiboldtext-neutral-500 z-60 p-2 bg-background top-full left-0 rounded-lg mt-1 w-max min-w-24 gap-2 shadow-2xl border-2 border-border`}
+					className={`absolute grid cursor-pointer grid-flow-col font-semiboldtext-neutral-500 z-60 p-2 bg-background top-full left-0 rounded-lg mt-1 w-fit  md:min-w-24 gap-2 shadow-2xl border-2 border-border`}
 				>
 					{options?.map((option) => (
 						<li
 							key={option?.id}
-							className={`cursor-pointer px-1.5 py-2 hover:bg-neutral-300 rounded-md transition-all duration-300 hover:text-neutral-700 ${
+							className={`cursor-pointer px-1 md:px-1.5 py-1 md:py-2 hover:bg-neutral-300 rounded-md transition-all duration-300 hover:text-neutral-700text-base ${
 								value?.id === option.id ? "bg-neutral-300" : ""
 							}`}
 							onClick={() => {

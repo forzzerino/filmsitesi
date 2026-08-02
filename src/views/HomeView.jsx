@@ -102,7 +102,7 @@ export default function HomeView() {
 		<>
 			<Hero movie={trendingMovies[randomNumber]} genres={genres} />
 			<div className="flex flex-col md:flex-row max-w-350 mx-auto my-12">
-				<div className="w-10/12 container flex flex-col gap-12 mx-auto px-4">
+				<div className="w-full md:w-10/12 container flex flex-col gap-12 mx-auto px-4">
 					<UpcomingMovies
 						upcomingMovies={upcomingMovies}
 						loading={loading}
@@ -137,7 +137,7 @@ export default function HomeView() {
 						limit={5}
 					/>
 				</div>
-				<div className="w-2/12 sticky top-20 h-fit flex-1 md:flex-2 px-4">
+				<div className="hidden md:block md:w-2/12 sticky top-20 h-fit px-4">
 					<div className="font-bold text-lg mb-2 flex justify-between items-center">
 						<p>Filtreler</p>
 						<button

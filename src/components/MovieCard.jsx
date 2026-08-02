@@ -23,19 +23,19 @@ export default function MovieCard({ movie }) {
 							<button className="button-secondary">Devamı</button>
 						</div>
 						{!loaded && (
-							<div className="h-64 sm:h-80 lg:h-96 w-full rounded-lg bg-gray-300 flex items-center justify-center">
+							<div className="h-40 sm:h-80 lg:h-96 w-full rounded-lg bg-gray-300 flex items-center justify-center">
 								<Spinner />
 							</div>
 						)}
 						<img
 							src={getImageUrl("w500", movie.poster_path)}
-							className={`${loaded ? "" : "hidden"} h-64 sm:h-80 lg:h-96 w-full rounded-lg object-cover cursor-pointer transition-all duration-300`}
+							className={`${loaded ? "" : "hidden"} h-40 sm:h-80 lg:h-96 w-full rounded-lg object-cover cursor-pointer transition-all duration-300`}
 							alt={movie.title}
 							onLoad={() => setLoaded(true)}
 						/>
 					</div>
 				</div>
-				<p className="font-bold text-lg line-clamp-1 mt-1">
+				<p className="font-bold md:text-lg line-clamp-1 mt-1">
 					{movie.title}
 				</p>
 				<div className="flex flex-row justify-between items-center mt-1 font-mono text-sm tracking-tighter font-medium">

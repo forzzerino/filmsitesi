@@ -51,6 +51,7 @@ export default function TopRated({ id, movies, title, desc }) {
 												"w500",
 												movie.poster_path,
 											)}
+											loading="lazy"
 											className="w-full md:w-96 h-64 md:h-auto object-cover rounded-xl md:rounded-xl md:rounded-r-none"
 											alt={movie.title}
 										/>
@@ -119,7 +120,7 @@ export default function TopRated({ id, movies, title, desc }) {
 												</p>
 											</div>
 											{movie.overview && (
-												<p className="tracking-tight line-clamp-3 leading-tight">
+												<p className="tracking-tight line-clamp-3 text-md md:text-md leading-tight">
 													<span>
 														{movie.overview}
 													</span>
@@ -136,13 +137,14 @@ export default function TopRated({ id, movies, title, desc }) {
 											</div>
 										</div>
 									</div>
-									<div className="-z-50 ">
+									<div className="-z-50 hidden md:visible ">
 										<img
 											src={getImageUrl(
 												"w1280",
 												movie.backdrop_path,
 											)}
 											alt={movie.title}
+											loading="lazy"
 											className="absolute top-0 left-0 h-full w-full -z-50 object-cover grayscale"
 											style={{
 												WebkitMaskImage:

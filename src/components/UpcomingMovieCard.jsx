@@ -7,16 +7,16 @@ export default function MovieCard({ movie }) {
 	return (
 		<div key={movie.id} className="moviecard group">
 			<Link to={`/movies/${movie.id}`} className="">
-				<div className="block group rounded-full w-32 h-32 relative mx-auto">
+				<div className="block group rounded-full h-20 w-20 md:w-32 md:h-32 relative mx-auto">
 					<div className="">
 						{!loaded && (
-							<div className="rounded-full bg-gray-300 w-32 h-32  flex items-center justify-center shadow-lg">
+							<div className="rounded-full bg-gray-300 h-20 w-20 md:w-32 md:h-32  flex items-center justify-center shadow-lg">
 								<Spinner />
 							</div>
 						)}
 						<img
 							src={getImageUrl("w500", movie.poster_path)}
-							className={`${loaded ? "" : "hidden"} w-32 border-border border-4 h-32 object-cover cursor-pointer transition-all hover:scale-110 duration-300 rounded-full`}
+							className={`${loaded ? "" : "hidden"} h-20 w-20 md:w-32 md:h-32  border-border border-4 object-cover cursor-pointer transition-all hover:scale-110 duration-300 rounded-full`}
 							alt={movie.title}
 							onLoad={() => setLoaded(true)}
 						/>
